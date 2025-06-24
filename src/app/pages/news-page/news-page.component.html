@@ -1,0 +1,29 @@
+<div class="row mt-3">
+    <div class="offset-3 col-6">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+                    <label for="title" class="form-label">Inserisci il termine di ricerca</label>
+                    <input type="text" id="title" class="form-control" formControlName="keyword">
+                    <button type="submit" class="btn btn-primary mt-3">
+                    Cerca
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (noResults) {
+  <div class="alert alert-warning text-center mt-3">
+    Nessun articolo trovato per la parola chiave inserita.
+  </div>
+}
+
+@if (articles.length > 0) {
+    <div class="row mt-3">
+        <div class="col-12">
+            <app-news-table [articles]="articles"></app-news-table>
+        </div>
+    </div>
+}

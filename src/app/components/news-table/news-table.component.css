@@ -1,0 +1,23 @@
+.article-image {
+  max-width: 100px;      /* Limita larghezza massima */
+  max-height: 80px;      /* Limita altezza massima */
+  object-fit: cover;     /* Mantiene proporzioni tagliando se serve */
+  border-radius: 4px;    /* Bordo arrotondato */
+}
+
+.url-cell {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.small-cell {
+    max-width: 150px;
+}
+
+.sticky-thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}

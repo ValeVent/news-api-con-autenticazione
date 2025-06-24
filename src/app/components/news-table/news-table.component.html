@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+            <table class="table table-striped table-bordered">
+                <thead class="sticky-thead bg-light">
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Url</th>
+                        <th>Data di pubblicazione</th>
+                        <th>Contenuto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (article of sortedArticles; track $index) {
+                    <tr>
+                        <td><img [src]="article.urlToImage" [alt]="article.source.name" class="article-image"></td>
+                        <td class="small-cell">{{ article.source.name }}</td>
+                        <td class="small-cell">{{ article.author }}</td>
+                        <td class="small-cell">{{ article.title }}</td>
+                        <td class="small-cell">{{ article.description }}</td>
+                        <td class="url-cell"><a [href]="article.url" target="_blank">{{ article.url }}</a></td>
+                        <td>{{ article.publishedAt | date:'dd/MM/yyyy' }}</td>
+                        <td>
+                            {{ article.content | cleanContent:500 }}
+                            <a *ngIf="article.url" [href]="article.url" target="_blank" rel="noopener noreferrer" class="text-primary">
+                                continua a leggere
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- rel="noopener noreferrer" è una buona pratica di sicurezza per link esterni -->
