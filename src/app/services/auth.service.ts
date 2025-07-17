@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(userCredentials: ILoginInfo): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>('http://localhost:3000/login', userCredentials);
+    return this.http.post<ILoginResponse>('https://news-api-backend-xj9y.onrender.com/login', userCredentials);
   }
 
   setToken(accessToken: string): void {

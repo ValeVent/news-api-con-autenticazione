@@ -7,9 +7,13 @@ import { INewsResponse } from '../../models/news.model';
   providedIn: 'root'
 })
 export class NewsService {
+  // Questo è l'URL BASE del tuo backend su Render, che ora include il proxy
+  // Sostituisci con il tuo URL effettivo di Render
+  private apiUrl = 'https://news-api-backend-xj9y.onrender.com/proxy-news';
+  // private apiUrl = 'https://newsapi.org/v2/everything';
 
-  private apiUrl = 'https://newsapi.org/v2/everything';
-  private apiKey = 'd837f48ed2fe4fe094706057da58575c';
+  // La API Key per le notizie NON serve più qui, è nel backend!
+  // private apiKey = 'd837f48ed2fe4fe094706057da58575c';
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +27,9 @@ export class NewsService {
       // .set('from', fromDate)
       // .set('to', today)
       .set('sortBy', 'popularity')
-      .set('apiKey', this.apiKey)
+      // Rimuovo la riga che aggiunge l'apiKey ai params, perché ora è gestita dal backend
+      // .set('apiKey', this.apiKey) 
+
       // .set('language', 'it'); // imposto la lingua italiana. Non lo faccio perchè le testate italiane ti costringono ad abbonarti per poterle leggere, quindi non ha senso farlo in questo esempio
 
     return this.http.get<INewsResponse>(this.apiUrl, { params }); // Fa una richiesta HTTP GET all’apiUrl (es. https://newsapi.org/v2/everything) passando i parametri.

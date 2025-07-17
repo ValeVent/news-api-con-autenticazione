@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng build --base-href \"/news-api-con-autenticazione/\" --configuration production && copy dist\\news-api-con-autenticazione\\browser\\index.html dist\\news-api-con-autenticazione\\browser\\404.html && npx angular-cli-ghpages --dir=dist\\news-api-con-autenticazione\\browser"
   },
   "private": true,
   "dependencies": {
