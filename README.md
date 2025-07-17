@@ -59,6 +59,8 @@ Per accedere e testare le funzionalità di login:
 
 ## Funzionalità Principali
 - Autenticazione Utente: Gli utenti devono effettuare il login con credenziali valide per accedere alla sezione delle notizie. Il token di autenticazione viene memorizzato in localStorage.
+  
+   - Indicatore di Caricamento Login: Durante il processo di login (che può subire un "cold start" sul backend), viene visualizzato un indicatore di caricamento per migliorare l'esperienza utente.
 
 - Protezione delle Rotte: Un AuthGuard impedisce l'accesso alla pagina delle notizie senza un token di autenticazione valido, reindirizzando l'utente alla pagina di login.
 
