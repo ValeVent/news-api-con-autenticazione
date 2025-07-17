@@ -14,100 +14,100 @@ Infine, per garantire il corretto funzionamento del routing su GitHub Pages e ri
 ## Credenziali di Accesso per Test
 Per accedere e testare le funzionalità di login:
 
-- Email: test@test.it
+- **Email**: test@test.it
 
-- Password: adminadmin
+- **Password**: adminadmin
 
 ## Tecnologie Utilizzate
 ### Frontend (Angular - Standalone Components)
-- Angular: Framework principale per lo sviluppo dell'applicazione (utilizzando la configurazione Standalone).
+- **Angular**: Framework principale per lo sviluppo dell'applicazione (utilizzando la configurazione Standalone).
 
-- TypeScript: Linguaggio di programmazione per lo sviluppo di Angular.
+- **TypeScript**: Linguaggio di programmazione per lo sviluppo di Angular.
 
-- HTML: Struttura dei componenti e dei template.
+- **HTML**: Struttura dei componenti e dei template.
 
-- CSS: Styling dei componenti.
+- **CSS**: Styling dei componenti.
 
-- Angular Router: Per la gestione della navigazione tra le diverse pagine/viste dell'applicazione (home, login, news).
+- **Angular Router**: Per la gestione della navigazione tra le diverse pagine/viste dell'applicazione (home, login, news).
 
-- Angular Forms (Reactive Forms): Per la gestione del form di login e del form di ricerca notizie.
+- **Angular Forms (Reactive Forms)**: Per la gestione del form di login e del form di ricerca notizie.
 
-- Angular HttpClient: Per effettuare richieste HTTP all'API esterna (sia al backend di autenticazione che al proxy per NewsAPI).
+- **Angular HttpClient**: Per effettuare richieste HTTP all'API esterna (sia al backend di autenticazione che al proxy per NewsAPI).
 
-- RxJS: Per la gestione dei flussi di dati asincroni (es. chiamate API, autenticazione).
+- **RxJS**: Per la gestione dei flussi di dati asincroni (es. chiamate API, autenticazione).
 
-- Bootstrap 5: Framework CSS utilizzato per il layout responsivo e lo stile dei componenti (es. navbar, card, table, btn, form-control).
+- **Bootstrap 5**: Framework CSS utilizzato per il layout responsivo e lo stile dei componenti (es. navbar, card, table, btn, form-control).
 
-- HashLocationStrategy: Strategia di routing di Angular per la compatibilità con server statici.
+- **HashLocationStrategy**: Strategia di routing di Angular per la compatibilità con server statici.
 
-- CleanContentPipe: Una pipe custom per troncare e pulire il contenuto degli articoli.
+- **CleanContentPipe**: Una pipe custom per troncare e pulire il contenuto degli articoli.
 
 ### Backend (json-server su Render.com)
-- Node.js: Ambiente di runtime per eseguire il server.
+- **Node.js**: Ambiente di runtime per eseguire il server.
 
-- json-server: Libreria Node.js per creare rapidamente API RESTful da un file JSON.
+- **json-server**: Libreria Node.js per creare rapidamente API RESTful da un file JSON.
 
-- json-server-auth: Estensione per json-server che aggiunge funzionalità di autenticazione (login/registrazione con JWT).
+- **json-server-auth**: Estensione per json-server che aggiunge funzionalità di autenticazione (login/registrazione con JWT).
 
-- cors: Middleware Node.js per abilitare il Cross-Origin Resource Sharing.
+- **cors**: Middleware Node.js per abilitare il Cross-Origin Resource Sharing.
 
-- node-fetch: Per effettuare richieste HTTP dal backend al NewsAPI.
+- **node-fetch**: Per effettuare richieste HTTP dal backend al NewsAPI.
 
-- Render.com: Piattaforma cloud utilizzata per il deployment del backend, fornendo un URL pubblico e persistente.
+- **Render.com**: Piattaforma cloud utilizzata per il deployment del backend, fornendo un URL pubblico e persistente.
 
-- NewsAPI: API esterna per il recupero di notizie.
+- **NewsAPI**: API esterna per il recupero di notizie.
 
 ## Funzionalità Principali
 - **Autenticazione Utente**: Gli utenti devono effettuare il login con credenziali valide per accedere alla sezione delle notizie. Il token di autenticazione viene memorizzato in localStorage.
   
-   - Indicatore di Caricamento Login: Durante il processo di login (che può subire un "cold start" sul backend), viene visualizzato un indicatore di caricamento per migliorare l'esperienza utente.
+   - **Indicatore di Caricamento Login**: Durante il processo di login (che può subire un "cold start" sul backend), viene visualizzato un indicatore di caricamento per migliorare l'esperienza utente.
 
-- Protezione delle Rotte: Un AuthGuard impedisce l'accesso alla pagina delle notizie senza un token di autenticazione valido, reindirizzando l'utente alla pagina di login.
+- **Protezione delle Rotte**: Un AuthGuard impedisce l'accesso alla pagina delle notizie senza un token di autenticazione valido, reindirizzando l'utente alla pagina di login.
 
-- Ricerca Notizie: Un form permette agli utenti di cercare articoli di notizie tramite una parola chiave.
+- **Ricerca Notizie**: Un form permette agli utenti di cercare articoli di notizie tramite una parola chiave.
 
-- Visualizzazione Notizie: I risultati della ricerca vengono visualizzati in una tabella con dettagli come immagine, fonte, autore, titolo, descrizione, URL, data di pubblicazione e contenuto troncato.
+- **Visualizzazione Notizie**: I risultati della ricerca vengono visualizzati in una tabella con dettagli come immagine, fonte, autore, titolo, descrizione, URL, data di pubblicazione e contenuto troncato.
 
-- Ordinamento Notizie: Le notizie vengono ordinate per data di pubblicazione (dalla più recente).
+- **Ordinamento Notizie**: Le notizie vengono ordinate per data di pubblicazione (dalla più recente).
 
-- Home Page Accattivante: Una pagina di benvenuto con un'immagine di sfondo e testo introduttivo.
+- **Home Page Accattivante**: Una pagina di benvenuto con un'immagine di sfondo e testo introduttivo.
 
-- Gestione Dati con Servizi: La logica di autenticazione e il recupero delle notizie sono incapsulati in servizi Angular dedicati.
+- **Gestione Dati con Servizi**: La logica di autenticazione e il recupero delle notizie sono incapsulati in servizi Angular dedicati.
 
 ## Sfide e Soluzioni Implementate
 Questo progetto ha affrontato e risolto diverse problematiche comuni nello sviluppo e deployment di applicazioni web:
 
-1. Deployment del Backend su Hosting Statico (GitHub Pages)
+1. **Deployment del Backend su Hosting Statico (GitHub Pages)**
 
    - Problema: GitHub Pages ospita solo file statici e non supporta un backend dinamico come json-server.
 
    - Soluzione: Il backend json-server è stato deployato su Render.com, ottenendo un URL pubblico e persistente. L'applicazione Angular si connette a questo URL.
 
-2. Problemi di CORS (Cross-Origin Resource Sharing)
+2. **Problemi di CORS (Cross-Origin Resource Sharing)**
 
    - Problema: Quando il frontend (su GitHub Pages) tenta di comunicare con il backend (su Render.com), i browser bloccano le richieste per motivi di sicurezza (Same-Origin Policy).
 
    - Soluzione: Il middleware cors è stato configurato esplicitamente nel server.js del backend, permettendo le richieste dal dominio di GitHub Pages.
 
-3. Autenticazione Reale con JSON Server
+3. **Autenticazione Reale con JSON Server**
 
    - Problema: json-server di base non gestisce un processo di login/registrazione che restituisca un token e verifichi le credenziali.
 
    - Soluzione: È stata integrata la libreria json-server-auth nel backend, che aggiunge endpoint /login e /register e gestisce l'autenticazione basata su token JWT.
 
-4. Limitazioni delle API Esterne (NewsAPI - Uso da Domini Pubblici)
+4. **Limitazioni delle API Esterne (NewsAPI - Uso da Domini Pubblici)**
 
    - Problema: Le API gratuite come NewsAPI spesso limitano le richieste da domini pubblici (es. GitHub Pages) o richiedono che la chiave API sia esposta nel codice frontend.
 
    - Soluzione: È stato implementato un "Proxy Backend" sul servizio Render.com esistente. L'applicazione Angular effettua richieste al proxy sul backend di Render, il quale a sua volta inoltra la richiesta a NewsAPI con la chiave API. Questo nasconde la chiave e aggira le restrizioni di dominio.
 
-5. Gestione Sicura della Chiave API
+5. **Gestione Sicura della Chiave API**
 
    - Problema: Esporre la chiave API direttamente nel codice frontend o backend è una vulnerabilità di sicurezza.
 
    - Soluzione: La chiave API di NewsAPI è stata configurata come variabile d'ambiente (NEWS_API_KEY) su Render.com. Il backend (server.js) recupera la chiave da questa variabile, mantenendola al sicuro e non hardcodata.
 
-6. Problema della Pagina 404 su GitHub Pages con Routing di Angular
+6. **Problema della Pagina 404 su GitHub Pages con Routing di Angular**
 
    - Problema: I server statici come GitHub Pages non sanno come gestire le rotte interne delle SPA. Un refresh della pagina su una rotta diversa dalla root (/) risulterebbe in un errore 404.
 
@@ -211,13 +211,13 @@ ng serve
 Questo progetto è un'applicazione Angular completa e funzionale che dimostra l'integrazione con API esterne complesse, l'implementazione di un sistema di autenticazione robusto, la gestione di proxy backend e la risoluzione di sfide comuni di deployment. È un ottimo esempio di come costruire applicazioni web dinamiche e sicure.
 
 ## Contatti
-- GitHub (Frontend): https://github.com/ValeVent/news-api-con-autenticazione
+- **GitHub (Frontend)**: https://github.com/ValeVent/news-api-con-autenticazione
 
-- GitHub (Backend): https://github.com/ValeVent/news-api-backend
+- **GitHub (Backend)**: https://github.com/ValeVent/news-api-backend
 
-- LinkedIn: https://www.linkedin.com/in/valentina-venturo
+- **LinkedIn**: https://www.linkedin.com/in/valentina-venturo
 
-- Sito Web: http://www.valentinaventuro.it
+- **Sito Web**: http://www.valentinaventuro.it
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
 
