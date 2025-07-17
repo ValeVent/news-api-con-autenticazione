@@ -111,120 +111,22 @@ Questo progetto ha affrontato e risolto diverse problematiche comuni nello svilu
 
    - Soluzione: È stata adottata la HashLocationStrategy in Angular (app.config.ts). Questo modifica gli URL aggiungendo un # (es. yourdomain.com/#/news), rendendo il routing compatibile con qualsiasi server statico e risolvendo i problemi di refresh.
 
+
 ## Contenuto del Repository Backend (news-api-backend)
 Il repository del backend contiene i seguenti file essenziali per il funzionamento del json-server con autenticazione e proxy:
 
 ### db.json
 Questo file funge da database per il json-server, definendo la struttura e i dati iniziali degli utenti. Le password sono hashate.
 
-{
-  "users": [
-    {
-      "email": "test@test.it",
-      "password": "$2a$10$X7aJE4WS71vr98XtZ4Y5JuuFNFH0bdjE7iv3XHETFMLhSg0SWq7/u",
-      "id": 1
-    },
-    {
-      "email": "valentinaventuro@libero.it",
-      "password": "$2a$10$TX3oyTNzUoY1SjoeO7M6ROyjS9LNz2bY3hp1jIqnNyMQ/HMFAB.W2",
-      "id": 2
-    },
-    {
-      "email": "mariorossi@test.it",
-      "password": "$2a$10$0IMsiciEfMEZ.0j3VXstKe3PD44fwIyRQ3.Qxkb65LM6SoDvsdukW",
-      "id": 3
-    }
-  ]
-}
 
 ### package.json
 Definisce le dipendenze del progetto backend e lo script di avvio.
 
-{
-  "name": "news-api-backend",
-  "version": "1.0.0",
-  "description": "JSON Server for News App",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "bcryptjs": "^3.0.2",
-    "cors": "^2.8.5",
-    "json-server": "^0.17.0",
-    "json-server-auth": "^2.1.0",
-    "node-fetch": "^2.7.0"
-  }
-}
 
 ### server.js
 Questo script configura e avvia il json-server. Include l'autenticazione (json-server-auth), il middleware cors e l'endpoint proxy per NewsAPI, recuperando la chiave API da una variabile d'ambiente.
 
-const jsonServer = require('json-server');
-const auth = require('json-server-auth');
-const server = jsonServer.create();
-const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
-const cors = require('cors');
-const fetch = require('node-fetch');
 
-// Configurazione CORS esplicita per permettere richieste dal dominio di GitHub Pages
-const corsOptions = {
-  origin: ['https://valevent.github.io'], // Sostituisci con il tuo dominio GitHub Pages
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204
-};
-
-server.use(cors(corsOptions));
-server.use(middlewares);
-
-// Abilita json-server-auth
-server.db = router.db;
-server.use(auth);
-
-// =========================================================
-// NUOVO: Endpoint Proxy per le News API
-// =========================================================
-const NEWS_API_URL = 'https://newsapi.org/v2/everything';
-const NEWS_API_KEY = process.env.NEWS_API_KEY; // Recupera la chiave API da una variabile d'ambiente
-
-server.get('/proxy-news', async (req, res) => {
-  try {
-    const keyword = req.query.q;
-    if (!keyword) {
-      return res.status(400).json({ error: 'Keyword parameter (q) is required.' });
-    }
-
-    // Costruisci l'URL per l'API di notizie esterna
-    const params = new URLSearchParams({
-      q: keyword,
-      sortBy: 'popularity',
-      apiKey: NEWS_API_KEY
-    });
-
-    const response = await fetch(`${NEWS_API_URL}?${params.toString()}`);
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('External News API Error:', response.status, errorData);
-      return res.status(response.status).json(errorData);
-    }
-
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error('Proxy Error:', error);
-    res.status(500).json({ error: 'Internal server error during news fetch.' });
-  }
-});
-// =========================================================
-
-server.use(router); // Utilizza il router di json-server per le altre risorse (es. /users)
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`JSON Server is running on port ${PORT}`);
-});
 
 ## Come Avviare il Progetto
 Questo progetto richiede l'esecuzione sia del frontend (applicazione Angular) che del backend (JSON Server deployato).
