@@ -77,7 +77,7 @@ Questo progetto ha affrontato e risolto diverse problematiche comuni nello svilu
 
 1. Deployment del Backend su Hosting Statico (GitHub Pages)
 
- - Problema: GitHub Pages ospita solo file statici e non supporta un backend dinamico come json-server.
+  - Problema: GitHub Pages ospita solo file statici e non supporta un backend dinamico come json-server.
 
  - Soluzione: Il backend json-server è stato deployato su Render.com, ottenendo un URL pubblico e persistente. L'applicazione Angular si connette a questo URL.
 
