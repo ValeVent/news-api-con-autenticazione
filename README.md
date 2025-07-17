@@ -83,33 +83,33 @@ Questo progetto ha affrontato e risolto diverse problematiche comuni nello svilu
 
 2. Problemi di CORS (Cross-Origin Resource Sharing)
 
- - Problema: Quando il frontend (su GitHub Pages) tenta di comunicare con il backend (su Render.com), i browser bloccano le richieste per motivi di sicurezza (Same-Origin Policy).
+   - Problema: Quando il frontend (su GitHub Pages) tenta di comunicare con il backend (su Render.com), i browser bloccano le richieste per motivi di sicurezza (Same-Origin Policy).
 
- - Soluzione: Il middleware cors è stato configurato esplicitamente nel server.js del backend, permettendo le richieste dal dominio di GitHub Pages.
+   - Soluzione: Il middleware cors è stato configurato esplicitamente nel server.js del backend, permettendo le richieste dal dominio di GitHub Pages.
 
 3. Autenticazione Reale con JSON Server
 
- - Problema: json-server di base non gestisce un processo di login/registrazione che restituisca un token e verifichi le credenziali.
+   - Problema: json-server di base non gestisce un processo di login/registrazione che restituisca un token e verifichi le credenziali.
 
- - Soluzione: È stata integrata la libreria json-server-auth nel backend, che aggiunge endpoint /login e /register e gestisce l'autenticazione basata su token JWT.
+   - Soluzione: È stata integrata la libreria json-server-auth nel backend, che aggiunge endpoint /login e /register e gestisce l'autenticazione basata su token JWT.
 
 4. Limitazioni delle API Esterne (NewsAPI - Uso da Domini Pubblici)
 
- - Problema: Le API gratuite come NewsAPI spesso limitano le richieste da domini pubblici (es. GitHub Pages) o richiedono che la chiave API sia esposta nel codice frontend.
+   - Problema: Le API gratuite come NewsAPI spesso limitano le richieste da domini pubblici (es. GitHub Pages) o richiedono che la chiave API sia esposta nel codice frontend.
 
- - Soluzione: È stato implementato un "Proxy Backend" sul servizio Render.com esistente. L'applicazione Angular effettua richieste al proxy sul backend di Render, il quale a sua volta inoltra la richiesta a NewsAPI con la chiave API. Questo nasconde la chiave e aggira le restrizioni di dominio.
+   - Soluzione: È stato implementato un "Proxy Backend" sul servizio Render.com esistente. L'applicazione Angular effettua richieste al proxy sul backend di Render, il quale a sua volta inoltra la richiesta a NewsAPI con la chiave API. Questo nasconde la chiave e aggira le restrizioni di dominio.
 
 5. Gestione Sicura della Chiave API
 
- - Problema: Esporre la chiave API direttamente nel codice frontend o backend è una vulnerabilità di sicurezza.
+   - Problema: Esporre la chiave API direttamente nel codice frontend o backend è una vulnerabilità di sicurezza.
 
- - Soluzione: La chiave API di NewsAPI è stata configurata come variabile d'ambiente (NEWS_API_KEY) su Render.com. Il backend (server.js) recupera la chiave da questa variabile, mantenendola al sicuro e non hardcodata.
+   - Soluzione: La chiave API di NewsAPI è stata configurata come variabile d'ambiente (NEWS_API_KEY) su Render.com. Il backend (server.js) recupera la chiave da questa variabile, mantenendola al sicuro e non hardcodata.
 
 6. Problema della Pagina 404 su GitHub Pages con Routing di Angular
 
- - Problema: I server statici come GitHub Pages non sanno come gestire le rotte interne delle SPA. Un refresh della pagina su una rotta diversa dalla root (/) risulterebbe in un errore 404.
+   - Problema: I server statici come GitHub Pages non sanno come gestire le rotte interne delle SPA. Un refresh della pagina su una rotta diversa dalla root (/) risulterebbe in un errore 404.
 
- - Soluzione: È stata adottata la HashLocationStrategy in Angular (app.config.ts). Questo modifica gli URL aggiungendo un # (es. yourdomain.com/#/news), rendendo il routing compatibile con qualsiasi server statico e risolvendo i problemi di refresh.
+   - Soluzione: È stata adottata la HashLocationStrategy in Angular (app.config.ts). Questo modifica gli URL aggiungendo un # (es. yourdomain.com/#/news), rendendo il routing compatibile con qualsiasi server statico e risolvendo i problemi di refresh.
 
 ## Contenuto del Repository Backend (news-api-backend)
 Il repository del backend contiene i seguenti file essenziali per il funzionamento del json-server con autenticazione e proxy:
