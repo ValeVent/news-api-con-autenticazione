@@ -58,7 +58,7 @@ Per accedere e testare le funzionalità di login:
 - NewsAPI: API esterna per il recupero di notizie.
 
 ## Funzionalità Principali
-- Autenticazione Utente: Gli utenti devono effettuare il login con credenziali valide per accedere alla sezione delle notizie. Il token di autenticazione viene memorizzato in localStorage.
+- **Autenticazione Utente**: Gli utenti devono effettuare il login con credenziali valide per accedere alla sezione delle notizie. Il token di autenticazione viene memorizzato in localStorage.
   
    - Indicatore di Caricamento Login: Durante il processo di login (che può subire un "cold start" sul backend), viene visualizzato un indicatore di caricamento per migliorare l'esperienza utente.
 
